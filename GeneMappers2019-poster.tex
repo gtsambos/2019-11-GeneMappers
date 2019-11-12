@@ -3,7 +3,8 @@
      blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter} %Default values for poster format options.
      
 \usepackage{tabularx,booktabs,adjustbox} % For tables
-\usepackage{wrapfig,anyfontsize}
+\usepackage{wrapfig,anyfontsize,lipsum}
+\linespread{1.2}
 \usetikzlibrary{calc,fit,arrows,decorations.pathmorphing,backgrounds,fit,positioning}
 \usetikzlibrary{shapes.symbols}
 
@@ -61,10 +62,10 @@
 
      \maketitle
 \block[bodyverticalshift=-2cm]{}{
-   {\Large
+   {\large\teal{
  Georgia Tsambos (1, 2), Peter Ralph (3), Jerome Kelleher (4), Stephen Leslie (1, 2, 5), Damjan Vukcevic (1, 2).
 (1) School of Mathematics and Statistics, University of Melbourne, Australia (2) Melbourne Integrative Genomics, University of Melbourne, Australia, (3) Department of Mathematics, University of Oregon, United States, (4) Big Data Institute, University of Oxford, United Kingdom, (5) School of Biosciences, University of Melbourne, Australia.\\[7mm]
-Presenting author: gtsambos (at) student.unimelb.edu.au
+Presenting author: gtsambos (at) student.unimelb.edu.au}
 }
 }
    
@@ -74,9 +75,9 @@ Presenting author: gtsambos (at) student.unimelb.edu.au
  \begin{columns}
  \begin{subcolumns}
    \subcolumn{31} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{
-To assess the performance of methods in population genetics, we often wish to simulate realistic genetic datasets while retaining detailed information about the history of the simulated genomes.
+{\fontsize{34}{35}\selectfont To assess the performance of methods in population genetics, we often wish to simulate realistic genetic datasets while retaining detailed information about the history of the simulated genomes.
 This poster briefly describes how we can efficiently simulate genetic information with full information about the common ancestry of particular genomic segments, as well as information about the populations that these segments have been inherited from.
-Although the software is still under development in \texttt{tskit} [1], our progress to date suggests that our methods are scaleable and fast enough to be useful in high-powered studies of subtle demographic questions.\\[3mm]
+Although the software is still under development in \texttt{tskit} [1], our progress to date suggests that our methods are scaleable and fast enough to be useful in high-powered studies of subtle demographic questions.}\\[3mm]
 %\teal{Section 1} introduces the \magenta{tree sequence} [1], a data structure that is capable of encoding a complete genealogy for a sample of chromosomes at each chromosomal location.
 %\teal{Section 2} shows how local ancestry information can be stored and extracted from tree sequences.
 %\teal{Section 3} outlines a method for simulating such information using recent advances implemented in the tree sequence simulation software msprime [1] and SLiM [2].
@@ -93,23 +94,21 @@ Although the software is still under development in \texttt{tskit} [1], our prog
      \begin{columns}%blocks will be placed into columns
          \column{.5}
          \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. The data structure: tree sequences}{
-Genetic sequence data is BIG and REPETITIVE:\\[2mm]
+{\fontsize{34}{35}\selectfont Genetic sequence data is BIG and REPETITIVE:}\\[2mm]
 
 \begin{center}
 {\tt
 \ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
 \ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
 \ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
 \ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
 \ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\[1mm]
 }
 \gray{\small $\leftarrow 5\times 10^7$ bases for small human chromosome $\rightarrow$}\\[4mm]
 \end{center}
 %Because of this, you are probably used to storing your data in a compressed format, and decompressing it only when you need to perform analyses or query the data. Doing this can be time-consuming and computationally expensive, however.
 %Storing $n = 1\times 10^5$ chromosomes in a compressed VCF requires $\approx$ 50 GB.
-However, common haplotypes in a sample are often simply a consequence of some common history. So if we know this history (as we always do in simulations!), storing it directly is often more convenient and efficient than storing the raw haplotypes. This is the key idea behind the \magenta{tree sequence} data structure [1], which encodes a complete genealogy for a sample of chromosomes in a succinct set of tables.\\
+{\fontsize{35}{35}\selectfont However, common haplotypes in a sample are often simply a consequence of some common history. So if we know this history (as we always do in simulations!), storing it directly is often more convenient and efficient than storing the raw haplotypes. This is the key idea behind the \magenta{tree sequence} data structure [1,2], which encodes a complete genealogy for a sample of chromosomes in a succinct set of tables.\\
 Tree sequences offer a few benefits to population geneticists compared with traditional sequence-based file formats:
 
 \begin{itemize}
@@ -118,7 +117,7 @@ Tree sequences offer a few benefits to population geneticists compared with trad
 \item As they hold rich detail about the history of the sample, many important processes can be observed directly from the tree structure.
 
 \item They can be queried and modified extremely quickly.
-\end{itemize}
+\end{itemize}}
      }
      
      %%%% BLOCK 3
@@ -126,7 +125,7 @@ Tree sequences offer a few benefits to population geneticists compared with trad
      } 
 \centering
   \begin{subcolumns}
-  \subcolumn{.48}
+  \subcolumn{.6}
   \block{}{
   \centering
   \input{pics/demographic-example.tex}
@@ -156,31 +155,27 @@ Tree sequences offer a few benefits to population geneticists compared with trad
           \begin{center}
           \input{pics/ancestry-and-ibd-in-trees.tex}
           \end{center}
-Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represent our datasets:
+{\fontsize{34}{35}\selectfont Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represent our datasets:
           \begin{itemize}
-          \item {\it Identity-by-descent: which samples share a common ancestor?}
+          \item {\it Identity-by-descent: which samples share a common ancestor where?}
           \item {\it Local ancestry: which ancestors have what population labels, and which samples descend from them?}
           \end{itemize}
 %          The branch joining a sample node to an ancestral node from a given population shows its ancestry. Any samples with a common ancestor on a tree have inherited the same genomic segment from the ancestor, and thus have an IBD relationship at this location.\\      
           Extracting this information efficiently is challenging due to correlations in genealogical structure between samples, and across chromosomes; 
-          in an upcoming paper, we will describe algorithms that allow us to do this.
+          in an upcoming paper, we will describe algorithms that allow us to do this.}
           }           
        
 \vspace{20cm}
 
-             \block[titleoffsety=-2.5cm,bodyoffsety=-2.5cm]{4. Application: demography inference}{
-To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [2]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.
-
-Using \texttt{msprime} [1], we performed 50 000 simulations of each demographic scenario hypothesised in [2], and 20 simulations with fixed demographic parameter values that we took as the "truth". Each replicate contained 240 samples of a 100Mb chromosome with a recombination rate of $1.25\times 10^{-7}$ base/gen.
-For each simulation, we calculated moments of IBD segment lengths at multiple time points.
-
-We used the \texttt{abcrf} package to infer the most plausible demographic scenario, and the \texttt{abc} package with neural-net regression to estimate parameter values.\\
+             \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
+{\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
+Closely following [3], we performed 50 000 simulations of various demographic scenarios. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
 
 {\bf Results: inference of demographic scenario}
 \begin{center}
-\begin{tabularx}{.4\textwidth}{p{11cm}p{11cm}X}
+\begin{tabularx}{.45\textwidth}{p{11cm}p{15cm}X}
 \toprule
-Posterior probability & Votes for correct model & Prior error rate \\
+Posterior probability & Votes for correct scenario & Prior error rate \\
 \midrule
 $93.36\% \pm 4.69\%$ &	$0.9633 \pm 0.0268$	& $0.0993 \pm 0.0008$\\
 \bottomrule\\
@@ -189,24 +184,24 @@ $93.36\% \pm 4.69\%$ &	$0.9633 \pm 0.0268$	& $0.0993 \pm 0.0008$\\
 
 {\bf Results: inference of divergence time}
 \begin{center}
-\begin{tabularx}{.4\textwidth}{p{5cm}p{5cm}p{8cm}X}
+\begin{tabularx}{.45\textwidth}{p{5cm}p{7cm}p{10cm}X}
 \toprule
-Mode & True value & Prior & 95\% HPDI \\
+Mode & True value & Our 95\% HPDI & 95\% HPDI in [2] \\
 \midrule
-13.59 & 14.93 & $(11.22, 19.90)$ & $(11.22, 19.90)$\\
+13.59 & 14.93 & $(11.22, 19.90)$ & $(2.00, 29.00)$\\
 \bottomrule\\
 \end{tabularx}
 \end{center}
-All simulations and analyses were completed on a standard desktop in under 12 hours.
+All simulations and analyses ran on a standard desktop in $<12$ hours.}
 }
      \end{columns}
 
 %%% BLOCK 5
- \block[titleoffsety=-3cm,bodyoffsety=-3cm]{5. Acknowledgements, references and further information}{
+ \block[titleoffsety=1cm,bodyoffsety=1cm]{5. Acknowledgements, references and further information}{
  }
   \begin{columns}
  \begin{subcolumns}
-    \subcolumn{25} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{\small
+    \subcolumn{25} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{\footnotesize
      GT is funded by the Helen Freeman scholarship, the Maurice Belz Fund and the Australian Government's Research Training Scheme.\\[1mm]
      [1] \texttt{https://tskit.readthedocs.io/en/latest/}\\[1mm]
      [2] Kelleher, J., et al. (2016). Efficient Coalescent Simulation and Genealogical Analysis for Large Sample Sizes. PLOS Computational Biology, 12(5).\\[1mm]

@@ -23,7 +23,7 @@
 %
 %%% ----------------------------------------------------------------
 %\begin{document}
-\begin{tikzpicture}[node distance=5mm and 5mm, yscale=3]
+\begin{tikzpicture}[node distance=5mm and 5mm, xscale=1.5, yscale=3]
 
 \tikzset{greynode/.style={font=\footnotesize,node distance=1cm and 1 cm,fill=black!10,draw=black!30,inner sep=0pt,minimum size=3.5mm,shape=circle},
 mutations/.style={shape=starburst,fill=red!50!blue,inner sep=0.8pt,starburst points=11,starburst point height=.2cm}}
@@ -51,8 +51,8 @@ mutations/.style={shape=starburst,fill=red!50!blue,inner sep=0.8pt,starburst poi
 % Populations
 \foreach \x in {0} \fill[pop\x] ($(leftAx) + (pop\x)$) -- ++(0,10) -- ++(2, 0) -- ++(0, -10) -- cycle;
 \foreach \x in {1, 2} \fill[pop\x] ($(leftAx) + (pop\x)$) -- ++(0,5) -- ++(2, 0) -- ++(0, -5) -- cycle;
-\foreach \x in {0} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 10)$) {\tiny\bf Population \x};
-\foreach \x in {1,2} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 5)$) {\tiny\bf Population \x};
+\foreach \x in {0} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 10)$) {\small\bf Population \x};
+\foreach \x in {1,2} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 5)$) {\small\bf Population \x};
 
 % Times
 \draw[very thin,color=gray] (12,0) node[below left] {\small Present day} -- (-1,0);
