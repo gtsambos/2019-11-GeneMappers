@@ -55,11 +55,14 @@ mutations/.style={shape=starburst,fill=red!50!blue,inner sep=0.8pt,starburst poi
 \foreach \x in {1,2} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 5)$) {\tiny\bf Population \x};
 
 % Times
-\draw[densely dashed,color=gray] (12,0) node[below left] {\tiny Present day} -- (-1,0);
+\draw[very thin,color=gray] (12,0) node[below left] {\small Present day} -- (-1,0);
 
 % White squares over pop0 bottleneck areas.
 \fill[white] ($(leftAx) + 0.9*(pop0) + (0,1)$) -- ++($0.5*(pop0)$) -- ++(0,2) -- ++($-0.5*(pop0)$) -- cycle;
 \fill[white] ($(leftAx) + 1.1*(pop0) +(popwidth) + (0,1)$) -- ++($-0.5*(pop0)$) -- ++(0,2) -- ++($0.5*(pop0)$) -- cycle;
+
+% Grey dashed arrows
+%\foreach \y in {2,4,6,8,10} \draw[gray,densely dashed,->] ($(12,\y)$) -- +(4,0);
 
 \end{tikzpicture} 
 %\end{document}  % The End
