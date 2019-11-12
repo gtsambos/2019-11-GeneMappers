@@ -30,7 +30,7 @@
   \newcommand{\gray}[1]{\textcolor{gray}{#1}}
 
 % tikz colour settings
-\tikzset{pop1/.style={blue!40},pop2/.style={red!40}}
+\tikzset{pop0/.style={red!50!yellow},pop1/.style={violet!80},pop2/.style={olive!70!green}}
 
 \definecolorpalette{myColorPalette} {
 \definecolor{colorOne}{named}{teal}
@@ -46,7 +46,7 @@
 % \newcommand{\crossmark}{\ding{55}}
 
  % Title, Author, Institute
- \title{{\bf Efficient simulation of identity-by-descent in large datasets}}
+ \title{{\bf Efficient simulation of identity-by-descent and ancestry in large datasets}}
  \author{{\bf Georgia Tsambos}}
  \institute{{\bf University of Melbourne, Australia}}
 
@@ -123,34 +123,36 @@ However, common haplotypes in a sample are often simply a consequence of some co
      }
      
      %%%% BLOCK 3
-     \block[titleoffsety=1cm,bodyoffsety=4cm]{3. Method outline}{
+     \block[titleoffsety=1cm,bodyoffsety=4cm]{3. Example: total IBD sharing over time}{
      } 
-%  \begin{subcolumns}
-%  \subcolumn{.48}
-%  \block{}{
+  \begin{subcolumns}
+  \subcolumn{.48}
+  \block{}{
+  \input{pics/demographic-example.tex}
 %  \input{pics/new-method/simulation-method-0.tex}
 %    \input{pics/new-method/simulation-method-2.tex}
 %      \input{pics/new-method/simulation-method-4.tex}
-%  }
-%  \subcolumn{.48}
-%   \block{}{
+  }
+  \subcolumn{.48}
+   \block{}{
+    \input{pics/demographic-example.tex}
 %  \input{pics/new-method/simulation-method-1.tex}
 %    \input{pics/new-method/simulation-method-3.tex}
 %      \input{pics/new-method/simulation-method-6.tex}
-%  }
-%  \end{subcolumns}
-%     
+  }
+  \end{subcolumns}
+     
 
 
      \column{.5}
      %%% BLOCK 2
-         \block[titleoffsety=-8cm,bodyoffsety=-3.5cm]{2. Local ancestry in tree sequences}{}  
+         \block[titleoffsety=-8cm,bodyoffsety=-3.5cm]{2. IBD and ancestry in tree sequences}{}  
 %          \begin{subcolumns}       
 %         \subcolumn{.45}
           \block{}{
-%          \begin{center}
-%          \input{pics/local-ancestry-extraction.tex}
-%          \end{center}
+          \begin{center}
+          \input{pics/ancestry-and-ibd-in-trees.tex}
+          \end{center}
           By assigning population labels to the nodes that correspond to ancestors of the sample, tree sequences can store the sample's local ancestry. 
           The branch joining a sample node to an ancestral node shows its ancestry.
           Extracting this information efficiently is challenging due to correlations in genealogical structure between samples, and across chromosomes; 
