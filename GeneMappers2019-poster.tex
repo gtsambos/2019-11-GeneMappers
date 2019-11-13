@@ -40,7 +40,7 @@
 \definecolor{colorThree}{named}{cyan}
 }
 
- \tikzposterlatexaffectionproofon %shows small comment on how the poster was made at bottom of poster
+ \tikzposterlatexaffectionproofoff %shows small comment on how the poster was made at bottom of poster
 
  % Commands
  \newcommand{\bs}{\textbackslash}   % backslash
@@ -77,16 +77,8 @@ Presenting author: gtsambos (at) student.unimelb.edu.au}
    \subcolumn{31} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{
 {\fontsize{34}{35}\selectfont To assess the performance of methods in population genetics, we often wish to simulate realistic genetic datasets while retaining detailed information about the history of the simulated genomes.
 This poster briefly describes how we can efficiently simulate genetic information with full information about the common ancestry of particular genomic segments, as well as information about the populations that these segments have been inherited from.
-Although the software is still under development in \texttt{tskit} [1], our progress to date suggests that our methods are scaleable and fast enough to be useful in high-powered studies of subtle demographic questions.}\\[3mm]
-%\teal{Section 1} introduces the \magenta{tree sequence} [1], a data structure that is capable of encoding a complete genealogy for a sample of chromosomes at each chromosomal location.
-%\teal{Section 2} shows how local ancestry information can be stored and extracted from tree sequences.
-%\teal{Section 3} outlines a method for simulating such information using recent advances implemented in the tree sequence simulation software msprime [1] and SLiM [2].
-%\teal{Section 4} demonstrates the performance of this method.
-%\teal{Section 5} provides further information for the interested viewer.\\
-
- 
+Although the software is still under development in \texttt{tskit} [1], our progress to date suggests that our methods are scaleable and fast enough to be useful in high-powered studies of subtle demographic questions.}\\[3mm] 
     }
-%   \subcolumn{3}  \block[bodyoffsetx=-2cm,bodyverticalshift=-6cm]{}{ \input{pics/admixed-family-tree.tex}}
  \end{subcolumns}
  \end{columns}
 
@@ -94,30 +86,90 @@ Although the software is still under development in \texttt{tskit} [1], our prog
      \begin{columns}%blocks will be placed into columns
          \column{.5}
          \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. The data structure: tree sequences}{
-{\fontsize{34}{35}\selectfont Genetic sequence data is BIG and REPETITIVE:}\\[2mm]
-
 \begin{center}
-{\tt
-\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
+{\tt\small
 \ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\[1mm]
+\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
+\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
+\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\[1mm]
 }
-\gray{\small $\leftarrow 5\times 10^7$ bases for small human chromosome $\rightarrow$}\\[4mm]
+\[
+\uparrow
+\]
+\input{pics/tree-sequence.tex}
+\[
+\Updownarrow
+\]
+{\small
+\renewcommand\baselinestretch{0.8}\selectfont
+\begin{tabularx}{.05\textwidth}{p{1.5cm}X}
+\toprule
+\multicolumn{2}{c}{{\bf Nodes}}\\
+\midrule
+ID & time  \\
+\midrule
+0 & 0.0 \\
+1 & 0.0\\
+2 & 0.0\\
+3 & 0.0\\
+4 & 1.1\\
+5 & 1.8\\
+6 & 3.0\\
+7 & 3.5\\
+8 & 4.0\\
+ & \\
+ & \\
+ \end{tabularx}\quad\quad\begin{tabularx}{.10\textwidth}{p{1.5cm}p{1.5cm}p{2cm}X}
+\toprule
+\multicolumn{4}{c}{{\bf Edges}}\\
+\midrule
+left & right & parent & child  \\
+\midrule
+3.0 & 10.0 & 4 & 2 \\
+3.0 & 10.0 & 4 & 3\\
+0.0 & 10.0 & 5 & 1\\
+0.0 & 3.0 & 5 & 3\\
+3.0 & 10.0 & 5 & 4\\
+0.0 & 7.0 & 6 & 0\\
+0.0 & 7.0 & 6 & 5 \\
+7.0 & 10.0 & 7 & 0\\
+7.0 & 10.0 & 7 & 5\\
+0.0 & 3.0 & 8 & 2\\
+0.0 & 3.0 & 8 & 6 \\
+\end{tabularx}\quad\quad\begin{tabularx}{.08\textwidth}{p{2.5cm}p{1.5cm}X}
+\toprule
+\multicolumn{3}{c}{{\bf Mutations}}\\
+\midrule
+location & time& node  \\
+\midrule
+1.5 & 2.3 & 5\\
+8.9 & 1.2 & 0\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & & \\
+ & & \\
+ \end{tabularx}
+}
 \end{center}
-%Because of this, you are probably used to storing your data in a compressed format, and decompressing it only when you need to perform analyses or query the data. Doing this can be time-consuming and computationally expensive, however.
+\vspace{10mm}
+{\fontsize{35}{35}\selectfont
+The \magenta{tree sequence} data structure [1,2] encodes a complete genealogy for a sample of chromosomes in a succinct set of tables. Compared with traditional sequence-based formats, tree sequences are \emph{compact}, \emph{fast} to process and \emph{informative} of the history of the sample.}
 %Storing $n = 1\times 10^5$ chromosomes in a compressed VCF requires $\approx$ 50 GB.
-{\fontsize{35}{35}\selectfont However, common haplotypes in a sample are often simply a consequence of some common history. So if we know this history (as we always do in simulations!), storing it directly is often more convenient and efficient than storing the raw haplotypes. This is the key idea behind the \magenta{tree sequence} data structure [1,2], which encodes a complete genealogy for a sample of chromosomes in a succinct set of tables.\\
-Tree sequences offer a few benefits to population geneticists compared with traditional sequence-based file formats:
-
-\begin{itemize}
-\item They can store large simulated datasets extremely compactly.
-
-\item As they hold rich detail about the history of the sample, many important processes can be observed directly from the tree structure.
-
-\item They can be queried and modified extremely quickly.
-\end{itemize}}
+%{\fontsize{35}{35}\selectfont However, common haplotypes in a sample are often simply a consequence of some common history. So if we know this history (as we always do in simulations!), storing it directly is often more convenient and efficient than storing the raw haplotypes. This is the key idea behind the \magenta{tree sequence} data structure [1,2], which encodes a complete genealogy for a sample of chromosomes in a succinct set of tables.\\
+%Tree sequences offer a few benefits to population geneticists compared with traditional sequence-based file formats:
+%
+%\begin{itemize}
+%\item They can store large simulated datasets extremely compactly.
+%
+%\item As they hold rich detail about the history of the sample, many important processes can be observed directly from the tree structure.
+%
+%\item They can be queried and modified extremely quickly.
+%\end{itemize}}
      }
      
      %%%% BLOCK 3
@@ -155,14 +207,12 @@ Tree sequences offer a few benefits to population geneticists compared with trad
           \begin{center}
           \input{pics/ancestry-and-ibd-in-trees.tex}
           \end{center}
-{\fontsize{34}{35}\selectfont Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represent our datasets:
+{\fontsize{34}{35}\selectfont Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represents the data:
           \begin{itemize}
-          \item {\it Identity-by-descent: which samples share a common ancestor where?}
-          \item {\it Local ancestry: which ancestors have what population labels, and which samples descend from them?}
+          \item {\it \magenta{Identity-by-descent}: which samples share a common ancestor? How recently? Over which genomic interval?}
+          \item {\it \magenta{Local ancestry}: which ancestors have which population labels? Which samples descend from them? Over which genomic interval?}
           \end{itemize}
-%          The branch joining a sample node to an ancestral node from a given population shows its ancestry. Any samples with a common ancestor on a tree have inherited the same genomic segment from the ancestor, and thus have an IBD relationship at this location.\\      
-          Extracting this information efficiently is challenging due to correlations in genealogical structure between samples, and across chromosomes; 
-          in an upcoming paper, we will describe algorithms that allow us to do this.}
+Extracting this information from large datasets requires efficient algorithms that account for the correlations in genealogical structure between samples, and across chromosomes.}
           }           
        
 \vspace{20cm}
@@ -186,7 +236,7 @@ $93.36\% \pm 4.69\%$ &	$0.9633 \pm 0.0268$	& $0.0993 \pm 0.0008$\\
 \begin{center}
 \begin{tabularx}{.45\textwidth}{p{5cm}p{7cm}p{10cm}X}
 \toprule
-Mode & True value & Our 95\% HPDI & 95\% HPDI in [2] \\
+Mode & True value & Our 95\% HPDI & 95\% HPDI in [3] \\
 \midrule
 13.59 & 14.93 & $(11.22, 19.90)$ & $(2.00, 29.00)$\\
 \bottomrule\\
@@ -209,20 +259,20 @@ All simulations and analyses ran on a standard desktop in $<12$ hours.}
     [4] Raynal, L., et al. (2019). ABC random forests for Bayesian parameter inference. Bioinformatics, 35(10), 1720 - 1728.\\[1mm]
 	[5] Csillery, K., et al. (2012). Abc: An R package for approximate Bayesian computation (ABC). Methods in Ecology and Evolution, 3(3), 475 - 479.
      }
-       \subcolumn{3} \block[bodyoffsetx=-2cm,bodyverticalshift=-8cm]{}{
+       \subcolumn{3} \block[bodyoffsetx=-2cm,bodyverticalshift=-6cm]{}{
        \begin{center}
        \includegraphics[scale=1]{pics/tskit-logo.png}
       \end{center}
        }
-       \subcolumn{3} \block[bodyoffsetx=-2cm,bodyverticalshift=-8cm]{}{
+       \subcolumn{3} \block[bodyoffsetx=-1cm,bodyverticalshift=-5cm]{}{
        \begin{center}
        \includegraphics[scale=1.2]{pics/unimelb-logo.jpg}
       \end{center}
        }
-        \subcolumn{3} \block[bodyoffsetx=-5cm,bodyverticalshift=-7cm]{}{
+      \subcolumn{3} \block[bodyoffsetx=-3cm,bodyverticalshift=-5.7cm]{}{
        \begin{center}
-       \includegraphics[scale=1]{pics/GT_headshot.jpg}\\   
-       Come say hi!
+       {\small Come say hi!}\\
+       \includegraphics[scale=1]{pics/GT_headshot.jpg} 
        \end{center}
        }
  \end{subcolumns}
