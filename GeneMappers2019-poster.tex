@@ -210,38 +210,41 @@ Extracting this information from large datasets requires efficient algorithms th
 
              \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
 {\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
-Closely following [3], we performed 50 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [1], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+Closely following [3], we performed 100 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [1], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+All simulations and analyses ran on a standard desktop in $<12$ hours.\\
 
-{\bf Results: inference of demographic scenario}
-\begin{center}
-\begin{tabularx}{.45\textwidth}{p{11cm}p{15cm}X}
-\toprule
-Posterior probability & Votes for correct scenario & Prior error rate \\
-\midrule
-$93.36\% \pm 4.69\%$ &	$0.9633 \pm 0.0268$	& $0.0993 \pm 0.0008$\\
-\bottomrule\\
-\end{tabularx}
-\end{center}
+{\bf Sample results}\\
+Our procedure inferred the correct demographic scenario with a high posterior probability, and produced tight estimates of relevant parameters, including the time of the split between West and East AJ groups.
 
-{\bf Results: inference of divergence time}
-\begin{center}
-\begin{tabularx}{.45\textwidth}{p{5cm}p{7cm}p{10cm}X}
+\begin{adjustbox}{valign=b}
+\begin{minipage}[t]{0.55\linewidth}
+{\small
+\begin{tabularx}{.8\textwidth}{p{9cm}X}
 \toprule
-Mode & True value & Our 95\% HPDI & 95\% HPDI in [3] \\
-\midrule
-13.59 & 14.93 & $(11.22, 19.90)$ & $(2.00, 29.00)$\\
-\bottomrule\\
+Posterior probability &$93.36\% \pm 4.69\%$ \\
+Votes for correct demography & $96.33\% \pm 2.68\%$\\
+Prior error rate & $0.0993 \pm 0.0008$ \\
+\bottomrule
 \end{tabularx}
-\end{center}
-All simulations and analyses ran on a standard desktop in $<12$ hours.}
+}
+\end{minipage}\end{adjustbox}\begin{adjustbox}{valign=c}
+\begin{minipage}[t]{0.25\linewidth}
+\includegraphics[scale=.6]{pics/abc-ibd-1.png}
+\end{minipage}
+\end{adjustbox}
+%{\small
+%
+%}
+}
 }
      \end{columns}
 
 %%% BLOCK 5
- \block[titleoffsety=2cm,bodyoffsety=2cm]{5. Acknowledgements, references and further information}{
+ \block[titleoffsety=3.5cm,bodyoffsety=3.5cm]{5. Acknowledgements, references and further information}{
  }
   \begin{columns}
  \begin{subcolumns}
+ \renewcommand\baselinestretch{1}\selectfont
     \subcolumn{22} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{\footnotesize
      GT is funded by the Helen Freeman scholarship, the Maurice Belz Fund and the Australian Government's Research Training Scheme.\\[1mm]
      [1] \texttt{https://tskit.readthedocs.io/en/latest/}\\[1mm]
