@@ -179,6 +179,12 @@ The \magenta{tree sequence} data structure [1,2] encodes a complete genealogy fo
 %  \centering
   \input{pics/demographic-example.tex}
   }
+    \colorlet{notebgcolor}{teal!30}
+   \note[targetoffsetx=0cm, targetoffsety=+11cm,width=.2\textwidth,innersep=.4cm]{
+Using \texttt{msprime} [2], I simulated a three-population demographic scenario, sampling twelve 100Mb chromosomes from each of the three populations. I assumed a recombination rate of $1\times 10^{-8}$ base/generation.
+The five heatplots on the left show the total proportion of IBD sharing between each pair of simulated samples with respect to ancestors from five different time points. 
+The simulation took $\approx 6$ sec to run, and IBD information was extracted in a further $\approx 2$ sec.
+   }
   \end{subcolumns}
 
 
@@ -204,7 +210,7 @@ Extracting this information from large datasets requires efficient algorithms th
 
              \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
 {\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
-Closely following [3], we performed 50 000 simulations of various demographic scenarios. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+Closely following [3], we performed 50 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [1], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
 
 {\bf Results: inference of demographic scenario}
 \begin{center}
@@ -232,7 +238,7 @@ All simulations and analyses ran on a standard desktop in $<12$ hours.}
      \end{columns}
 
 %%% BLOCK 5
- \block[titleoffsety=1cm,bodyoffsety=1cm]{5. Acknowledgements, references and further information}{
+ \block[titleoffsety=2cm,bodyoffsety=2cm]{5. Acknowledgements, references and further information}{
  }
   \begin{columns}
  \begin{subcolumns}
