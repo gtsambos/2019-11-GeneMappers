@@ -209,38 +209,35 @@ Extracting this information from large datasets requires efficient algorithms th
 \vspace{20cm}
 
              \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
-{\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
-Closely following [3], we performed 100 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [1], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
-All simulations and analyses ran on a standard desktop in $<12$ hours.\\
-
-{\bf Sample results}\\
-Our procedure inferred the correct demographic scenario with a high posterior probability, and produced tight estimates of relevant parameters, including the time of the split between West and East AJ groups.
 
 \begin{adjustbox}{valign=b}
-\begin{minipage}[t]{0.55\linewidth}
+\begin{minipage}[t]{0.5\linewidth}
 {\small
 \begin{tabularx}{.8\textwidth}{p{9cm}X}
 \toprule
-Posterior probability &$93.36\% \pm 4.69\%$ \\
-Votes for correct demography & $96.33\% \pm 2.68\%$\\
+\multicolumn{2}{c}{\bf Model inference}\\
+\midrule
+Posterior probability for correct~model &  $96.33\% \pm 2.68\%$ \\
+Votes for correct demography &$93.36\% \pm 4.69\%$\\
 Prior error rate & $0.0993 \pm 0.0008$ \\
 \bottomrule
 \end{tabularx}
 }
 \end{minipage}\end{adjustbox}\begin{adjustbox}{valign=c}
-\begin{minipage}[t]{0.25\linewidth}
-\includegraphics[scale=.6]{pics/abc-ibd-1.png}
+\begin{minipage}[t]{0.35\linewidth}
+\includegraphics[scale=.2]{pics/abc-ibd-4.png}
 \end{minipage}
 \end{adjustbox}
-%{\small
-%
-%}
+
+{\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
+Closely following [3], we performed 100 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [3], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+All simulations and analyses ran on a standard desktop in $<12$ hours.
 }
 }
      \end{columns}
 
 %%% BLOCK 5
- \block[titleoffsety=3.5cm,bodyoffsety=3.5cm]{5. Acknowledgements, references and further information}{
+ \block[titleoffsety=1.2cm,bodyoffsety=1.2cm]{5. Acknowledgements, references and further information}{
  }
   \begin{columns}
  \begin{subcolumns}

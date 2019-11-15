@@ -55,7 +55,7 @@ mutations/.style={shape=starburst,fill=red!50!blue,inner sep=0.8pt,starburst poi
 \foreach \x in {1,2} \node[above,pop\x] (label\x) at ($(leftAx) + (pop\x) + (1, 5)$) {\small\bf Population \x};
 
 % Times
-\draw[very thin,color=gray] (12,0) node[below left] {\small Present day} -- (-1,0);
+\draw[very thin,color=gray] (-1,0) node[below] {\small Present day} -- (12,0);
 
 % White squares over pop0 bottleneck areas.
 \fill[white] ($(leftAx) + 0.9*(pop0) + (0,1)$) -- ++($0.5*(pop0)$) -- ++(0,2) -- ++($-0.5*(pop0)$) -- cycle;
