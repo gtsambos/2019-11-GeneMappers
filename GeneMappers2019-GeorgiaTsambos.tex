@@ -179,22 +179,20 @@ Which segments came from ancestors in a given population?
 
 
 \begin{frame}
-\frametitle{What is admixture?}
-%\begin{minipage}[t][2cm][t]{\textwidth}
+\frametitle{What can we simulate with \texttt{tskit}? An example}
 %\begin{center}
-%\input{pics/split-popgen.tex}
+\begin{minipage}{.33\linewidth}
+\includegraphics[scale=.3]{pics/kinships-10000.png}
+\end{minipage}\begin{minipage}{.33\linewidth}
+\includegraphics[scale=.3]{pics/kinships-6000.png}
+\end{minipage}\begin{minipage}{.33\linewidth}
+\includegraphics[scale=.3]{pics/kinships-2000.png}
+\end{minipage}
+
+\vspace{5mm}
+
+\input{pics/demographic-example-slides.tex}
 %\end{center}
-%\end{minipage}
-
-\begin{wideitemize}
-%\item In the context of my work: {\it a group of people.}
-%\item {\it Recombination, mutation, selection and drift} act over time to differentiate  populations that have split from each other.
-%\item Analysing these differences are the basis for methods that infer the ancestry of DNA from people with mixed, or unknown backgrounds...
-    \item An organism has \magenta{ancestry} with a given population if they have inherited some genetic material from ancestors who belonged to that population. 
-    \item Any organism with $>1$ ancestry is \magenta{admixed}.
-    \item \magenta{Introgression} is admixture between different species.
-\end{wideitemize}
-
 \end{frame}
 
 %\begin{frame}
