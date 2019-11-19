@@ -167,19 +167,17 @@
 %\end{center}
 \end{minipage}\hspace{1cm}\begin{minipage}{.45\linewidth}
 \flushright
-{\bf\magenta{Identity-by-descent:}}\\
-Which segments came from the same ancestor?
+{\bf\magenta{Identity-by-descent (IBD):}}\\
+Which segments came from the same ancestral chromosome?
 \vspace{15mm}
 
-{\bf\magenta{Local ancestry:}}\\
+{\bf\magenta{Local ancestry (LA):}}\\
 Which segments came from ancestors in a given population?
 \end{minipage}
 \end{frame}
 
-
-
 \begin{frame}
-\frametitle{What can we simulate with \texttt{tskit}? An example}
+\frametitle{IBD and LA can be extracted from tree sequences}
 %\begin{center}
 \begin{minipage}{.33\linewidth}
 \includegraphics[scale=.3]{pics/kinships-10000.png}
@@ -195,21 +193,24 @@ Which segments came from ancestors in a given population?
 %\end{center}
 \end{frame}
 
-%\begin{frame}
-%\frametitle{What is admixture?}
-%\begin{minipage}[t][2cm][t]{\textwidth}
-%\begin{center}
-%\input{pics/admix-popgen.tex}
-%\end{center}
-%\end{minipage}
-%
-%%{\small
-%%\begin{wideitemize}
-%%    \item A person has {\bf ancestry} with a given population if they have inherited some genetic material from ancestors who belonged to that population. 
-%%    \item Any person with $>1$ ancestry is {\bf admixed}.
-%%    \item Migrations that bring together historically distinct populations are {\bf admixture~events}.
-%%\end{wideitemize}
-%%}
-%\end{frame}
+\begin{frame}
+\frametitle{Future work: what can we infer with this information?}
+\begin{minipage}{.45\linewidth}
+\begin{center}
+\includegraphics[scale=.06]{pics/abc-ibd-4.png}
+\end{center}
+\end{minipage}\begin{minipage}{.5\linewidth}
+\centering
+See poster $\# 32$ tonight!
+
+\begin{minipage}{.25\linewidth}
+\includegraphics[scale=.3]{pics/unimelb-logo.jpg}
+\end{minipage}\begin{minipage}{.25\linewidth}
+\includegraphics[scale=.3]{pics/tskit-logo.png}
+\end{minipage}
+\flushright
+\texttt{https://tskit.readthedocs.io/}
+\end{minipage}
+\end{frame}
 
 \end{document}
