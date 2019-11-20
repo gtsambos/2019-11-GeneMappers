@@ -159,12 +159,11 @@
 %\maketitle
 
 \begin{frame}
-\frametitle{What I study}
+%\frametitle{What I study}
+\begin{center}
 \begin{minipage}{.45\linewidth}
 \flushleft
-%\begin{center}
 \input{pics/ibd-and-local-ancestry-defn.tex}
-%\end{center}
 \end{minipage}\hspace{1cm}\begin{minipage}{.45\linewidth}
 \flushright
 {\bf\magenta{Identity-by-descent (IBD):}}\\
@@ -174,38 +173,59 @@ Which segments came from the same ancestral chromosome?
 {\bf\magenta{Local ancestry (LA):}}\\
 Which segments came from ancestors in a given population?
 \end{minipage}
+\vspace{5mm}
+\flushleft
+These relationships can be extracted efficiently from simulated and real genetic datasets stored as \magenta{tree sequences}.
+\end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{IBD and LA can be extracted from tree sequences}
-%\begin{center}
+\frametitle{IBD can be extracted from tree sequences}
+\begin{minipage}{.75\linewidth}
+
 \begin{minipage}{.33\linewidth}
-\includegraphics[scale=.3]{pics/kinships-10000.png}
+\includegraphics[scale=.2]{pics/kinships-10000.png}
 \end{minipage}\begin{minipage}{.33\linewidth}
-\includegraphics[scale=.3]{pics/kinships-6000.png}
+\includegraphics[scale=.2]{pics/kinships-6000.png}
 \end{minipage}\begin{minipage}{.33\linewidth}
-\includegraphics[scale=.3]{pics/kinships-2000.png}
+\includegraphics[scale=.2]{pics/kinships-2000.png}
 \end{minipage}
 
 \vspace{5mm}
 
 \input{pics/demographic-example-slides.tex}
-%\end{center}
+\end{minipage}\begin{minipage}{.3\linewidth}
+\begin{center}
+{\small
+\begin{wideitemize}
+\item {\bf Powerful:}\\ even small IBD segments are detectable
+\item {\bf Fast:}\\ $\approx 8$ sec on a laptop
+\end{wideitemize}
+}
+\end{center}
+\end{minipage}
+
 \end{frame}
 
 \begin{frame}
-\frametitle{Future work: what can we infer with this information?}
-\begin{minipage}{.45\linewidth}
+\frametitle{Future work: what analyses are now possible?}
+\begin{minipage}{.55\linewidth}
+\flushleft
 \begin{center}
+\begin{itemize}
+\item Analysis of Biobank datasets
+\item Simulation-based inference\\
+\end{itemize}
+\vspace{5mm}
 \includegraphics[scale=.06]{pics/abc-ibd-4.png}
 \end{center}
-\end{minipage}\begin{minipage}{.5\linewidth}
+\end{minipage}\begin{minipage}{.4\linewidth}
 \centering
-See poster $\# 32$ tonight!
+See me at poster $\# 32$!
 
-\begin{minipage}{.25\linewidth}
-\includegraphics[scale=.3]{pics/unimelb-logo.jpg}
-\end{minipage}\begin{minipage}{.25\linewidth}
+\begin{minipage}{.35\linewidth}
+\includegraphics[scale=.35]{pics/unimelb-logo.jpg}
+\end{minipage}\begin{minipage}{.2\linewidth}
 \includegraphics[scale=.3]{pics/tskit-logo.png}
 \end{minipage}
 \flushright
